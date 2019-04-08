@@ -19,6 +19,7 @@ function appSearch(userInput, userQuery) {
             break;
         case "movie-this":
             //searching for movie
+            movieThis();
             break;
         case "do-what-it-says":
             //searching for the song in txt file
@@ -55,23 +56,26 @@ fs.appendFile("random.txt", "utf8", function (err) {
 
 user input: movie-this <movie name>
 */
-omdb.get({
-    title: userQuery
-}).then(res => {
-    // console.log('got response:', res);
-    /* var movieInfo = {
-         year: res.year,
-         iMDB: res.ratings[0].value,
-         tomatoe: res.ratings[0].value, 
-         country: res.country, 
-         language: res.country, 
-         plot: res.plot, 
-         actors: res.actors 
-     }
-     console.log(movieInfo)*/
-    console.log('year: ' + $(res.year))
-}).catch(console.error);
+function movieThis() {
+    omdb.get({
+        title: userQuery
+    }).then(res => {
+        // console.log('got response:', res);
+        var movieInfo = {
+            year: res.year,
+            iMDB: res.ratings[0].value,
+            tomatoe: res.ratings[0].value,
+            country: res.country,
+            language: res.country,
+            plot: res.plot,
+            actors: res.actors
+        }
+        console.log(movieInfo)
 
+        console.log('year: ' + $(res.year))
+    }).catch(console.error);
+
+}
 
 /*needs for spotify
 1. take in song name
