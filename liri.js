@@ -13,8 +13,8 @@ var userQuery = process.argv[3];
 //need axios *i think*
 function concertThis() {
     if (userInput == "concert-this") {
-       
-           
+
+
     }
 }
 concertThis();
@@ -32,7 +32,7 @@ function spotifyThis() {
     if (userInput == "spotify-this-song") {
         spotify.search({ type: 'track', query: userQuery })
             .then(function (response) {
-                console.log(response);
+                console.log(response.tracks.items[0].album.artists[3]);
             })
             .catch(function (err) {
                 console.log(err);
