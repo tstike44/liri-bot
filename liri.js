@@ -59,17 +59,13 @@ omdb.get({
     title: userQuery
 }).then(res => {
     // console.log('got response:', res);
-    /* var movieInfo = {
-         year: res.year,
-         iMDB: res.ratings[0].value,
-         tomatoe: res.ratings[0].value, 
-         country: res.country, 
-         language: res.country, 
-         plot: res.plot, 
-         actors: res.actors 
-     }
-     console.log(movieInfo)*/
-    console.log('year: ' + $(res.year))
+    console.log("Year Released: " + res.year)
+    console.log("IMDB Rating: " + res.ratings[0].value)
+    console.log("Tomatoe Score: " + res.ratings[1].value)
+    console.log("Country: " + res.country)
+    console.log("Language(s): " + res.language)
+    console.log(("Cast: " + JSON.stringify(res.actors, null, 2)))
+    
 }).catch(console.error);
 
 
@@ -81,21 +77,11 @@ omdb.get({
 5. the album that the song is from
 */
 
-/*
+
 //start of spotify
-var song = process.argv[2];
-console.log(song)
-
-spotify.search({ type: "Covet", query: 'All the Small Things' })
-  .then(function(response) {
-    console.log(response);
-  })
-  .catch(function(err) {
-    console.log("Error Occurred: " + err);
-  });
-*/
 
 
+//need axios *i think*
 /*
 //bands in town url i think waiting for api key
 "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
