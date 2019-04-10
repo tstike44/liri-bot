@@ -103,7 +103,7 @@ function movieThis() {
     } //end of inner if statement
 }
 
-function doThis() {
+function doSays() {
     fs.readFile("random.txt", "utf8", function (err, data) {
         if (err) {
             console.log(err);
