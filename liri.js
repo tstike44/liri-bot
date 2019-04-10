@@ -4,94 +4,122 @@ var keys = require("./keys.js");
 var spotify = new Spotify(keys.spotify);
 const omdb = new (require('omdbapi'))('trilogy');
 const axios = require("axios")
+const moment = require("moment")
 var fs = require("fs");
-// var axios = require.length("axios");
 
-//app logic
 var userInput = process.argv[2];
 var userQuery = process.argv[3];
-//need axios *i think*
+
+
+switch (userInput) {
+    case "concert-this":
+        concertThis();
+        break;
+    case "spotify-this-song":
+        spotifyThis();
+        break;
+    case "movie-this":
+        movieThis();
+        break;
+    case "do-what-it-says":
+        doSays();
+    default:
+        console.log("type something 4head");
+
+}
+
 function concertThis() {
-    if (userInput == "concert-this") {
-
-
+    if (!userQuery) {
+        console.log("Give me an Artist to search")
+    } else {
+        axios.get("https://rest.bandsintown.com/artists/" + userQuery + "/events?app_id=codingbootcamp")
+            .then(function (response) {
+                var conDate = response.data[0].datetime
+                conDate = moment().format('L');
+                console.log("Venue: " + response.data[0].venue.name)
+                console.log("Venue City: " + response.data[0].venue.city)
+                console.log("Date of concert: " + conDate)
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 }
-concertThis();
 
-/*needs for spotify
-1. take in song name
-2. responed with Artist
-3. song name
-4. preview link from spotify
-5. the album that the song is from
-*/
+
 //start of spotify
-//appending text file
 function spotifyThis() {
-    if (userInput == "spotify-this-song") {
+    if (userQuery) {
         spotify.search({ type: 'track', query: userQuery })
             .then(function (response) {
-                console.log(response.tracks.items[0].album.artists[3]);
+                console.log("Artist: " + response.tracks.items[0].artists[0].name);
+                console.log("Song Name: " + response.tracks.items[0].name)
+                console.log("Preview of song: " + response.tracks.items[0].preview_url);
+                console.log("Album Name: " + response.tracks.items[0].album.name);
             })
             .catch(function (err) {
                 console.log(err);
             });
-
-        /* fs.appendFile("random.txt", "utf8", function (err) {
-            if (err) {
+    } else {
+        spotify.search({ type: 'track', query: "Ace of base" })
+            .then(function (response) {
+                console.log("Artist: " + response.tracks.items[0].artists[0].name);
+                console.log("Song Name: " + response.tracks.items[0].name)
+                console.log("Preview of song: " + response.tracks.items[0].preview_url);
+                console.log("Album Name: " + response.tracks.items[0].album.name);
+            })
+            .catch(function (err) {
                 console.log(err);
-            }
-            else {
-                console.log();
-            }
-        });
-        */
+            });
     }
 }
-spotifyThis();
 
-/* omdb needs 
- * Title of the movie.
-1. Year the movie came out.
-2. IMDB Rating of the movie.
-3. Rotten Tomatoes Rating of the movie.
-4. Country where the movie was produced.
-5. Language of the movie.
-6. Plot of the movie.
-7. Actors in the movie. 
-user input: movie-this <movie name>
-*/
 function movieThis() {
-    if (userInput == "movie-this") {
-        if (!userQuery) {
-            omdb.get({
-                title: "Mr.Nobody"
-            }).then(res => {
-                // console.log('got response:', res);
-                console.log("Title: " + res.title)
-                console.log("Year Released: " + res.year)
-                console.log("IMDB Rating: " + res.ratings[0].value)
-                console.log("Tomatoe Score: " + res.ratings[1].value)
-                console.log("Country: " + res.country)
-                console.log("Language(s): " + res.language)
-                console.log(("Cast: " + JSON.stringify(res.actors, null, 2)))
-            }).catch(console.error);
-        } else {
+    if (!userQuery) {
+        omdb.get({
+            title: "Mr.Nobody"
+        }).then(res => {
+            console.log("Title: " + res.title + "\n")
+            console.log("Year Released: " + res.year + "\n")
+            console.log("IMDB Rating: " + res.ratings[0].value + "\n")
+            console.log("Tomatoe Score: " + res.ratings[1].value + "\n")
+            console.log("Country: " + res.country + "\n")
+            console.log("Language(s): " + res.language + "\n")
+            console.log(("Cast: \n" + JSON.stringify(res.actors[0]) + "\n" + JSON.stringify(res.actors[1]) + "\n" + JSON.stringify(res.actors[2]) + "\n" + JSON.stringify(res.actors[3])))
+        }).catch(console.error);
 
-            omdb.get({
-                title: userQuery
-            }).then(res => {
-                // console.log('got response:', res);
-                console.log("Title: " + res.title)
-                console.log("Year Released: " + res.year)
-                console.log("IMDB Rating: " + res.ratings[0].value)
-                console.log("Tomatoe Score: " + res.ratings[1].value)
-                console.log("Country: " + res.country)
-                console.log("Language(s): " + res.language)
-                console.log(("Cast: " + JSON.stringify(res.actors, null, 2)))
-            }).catch(console.error);
-        } //end of inner if statement
-    }
+    } else {
+        omdb.get({
+            title: userQuery
+        }).then(res => {
+            console.log("Title: " + res.title + "\n")
+            console.log("Year Released: " + res.year + "\n")
+            console.log("IMDB Rating: " + res.ratings[0].value + "\n")
+            console.log("Tomatoe Score: " + res.ratings[1].value + "\n")
+            console.log("Country: " + res.country + "\n")
+            console.log("Language(s): " + res.language + "\n")
+            console.log(("Cast: \n" + JSON.stringify(res.actors[0]) + "\n" + JSON.stringify(res.actors[1]) + "\n" + JSON.stringify(res.actors[2]) + "\n" + JSON.stringify(res.actors[3])))
+        }).catch(console.error);
+    } //end of inner if statement
 }
-movieThis();
+
+function doThis() {
+    fs.readFile("random.txt", "utf8", function (err, data) {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            spotify.search({ type: 'track', query: data })
+                .then(function (response) {
+                    console.log("Artist: " + response.tracks.items[0].artists[0].name);
+                    console.log("Song Name: " + response.tracks.items[0].name)
+                    console.log("Preview of song: " + response.tracks.items[0].preview_url);
+                    console.log("Album Name: " + response.tracks.items[0].album.name);
+                })
+                .catch(function (err) {
+                    console.log(err);
+                });
+
+        }
+    });
+}
