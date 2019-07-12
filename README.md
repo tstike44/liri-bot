@@ -13,10 +13,10 @@
         * concert-this < artist name >
         * spotify-this-song < song name >
         * movie-this < movie name >
-        * do-what-it-says <--- this command does not need an input to     follow as it will read the command that is the default in our random.txt file
+        * do-what-it-says <--- this command does not need an input to follow as it will read the command that is the default in our random.txt file
 
 
-# To view a demonstration of each of the functions in use please view the video below: 
+## To view a demonstration of each of the functions in use please view the video below: 
 
 Demonstration Video Here: https://streamable.com/wnr57
 
