@@ -6,7 +6,7 @@
     * Search for a movie (IMDB API)
   
 
-  To Run on local machine: 
+  ## To Run on local machine: 
     1) clone repo to the directory of your choosing
     2) open repo in terminal
     3) run "node liri.js" followed by one of 4 commands:
