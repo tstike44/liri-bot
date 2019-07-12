@@ -24,7 +24,12 @@ switch (userInput) {
     case "do-what-it-says":
         doSays();
     default:
-        console.log("type something 4head");
+        console.log("Please type one of the following commands:" +
+            "\n concert this <artist name>" +
+            "\n spotify-this-song <song name>" +
+            "\n movie-this <movie name>" +
+            "\n do-what-it-says"
+        );
 
 }
 
