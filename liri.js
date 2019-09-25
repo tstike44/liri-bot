@@ -84,26 +84,26 @@ function movieThis() {
         omdb.get({
             title: "Mr.Nobody"
         }).then(res => {
-            console.log("Title: " + res.title + "\n")
+            console.log("\n~~~~~~~~~~~~~~~~\n" + "Title: " + res.title + "\n")
             console.log("Year Released: " + res.year + "\n")
             console.log("IMDB Rating: " + res.ratings[0].value + "\n")
             console.log("Tomatoe Score: " + res.ratings[1].value + "\n")
             console.log("Country: " + res.country + "\n")
             console.log("Language(s): " + res.language + "\n")
-            console.log(("Cast: \n" + JSON.stringify(res.actors[0]) + "\n" + JSON.stringify(res.actors[1]) + "\n" + JSON.stringify(res.actors[2]) + "\n" + JSON.stringify(res.actors[3])))
+            console.log(("Cast: \n" + JSON.stringify(res.actors[0]) + "\n" + JSON.stringify(res.actors[1]) + "\n" + JSON.stringify(res.actors[2]) + "\n" + JSON.stringify(res.actors[3]) + "\n~~~~~~~~~~~~~~~~"))
         }).catch(console.error);
 
     } else {
         omdb.get({
             title: userQuery
         }).then(res => {
-            console.log("Title: " + res.title + "\n")
+            console.log("\n~~~~~~~~~~~~~~~~\n" + "Title: " + res.title + "\n")
             console.log("Year Released: " + res.year + "\n")
             console.log("IMDB Rating: " + res.ratings[0].value + "\n")
             console.log("Tomatoe Score: " + res.ratings[1].value + "\n")
             console.log("Country: " + res.country + "\n")
             console.log("Language(s): " + res.language + "\n")
-            console.log(("Cast: \n" + JSON.stringify(res.actors[0]) + "\n" + JSON.stringify(res.actors[1]) + "\n" + JSON.stringify(res.actors[2]) + "\n" + JSON.stringify(res.actors[3])))
+            console.log(("Cast: \n" + JSON.stringify(res.actors[0]) + "\n" + JSON.stringify(res.actors[1]) + "\n" + JSON.stringify(res.actors[2]) + "\n" + JSON.stringify(res.actors[3]) + "\n~~~~~~~~~~~~~~~~"))
         }).catch(console.error);
     } //end of inner if statement
 }
